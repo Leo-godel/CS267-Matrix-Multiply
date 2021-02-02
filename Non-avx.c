@@ -16,10 +16,10 @@ const char* dgemm_desc = "Simple blocked dgemm.";
 static void do_block(int lda, int M, int N, int K, double* A, double* B, double* C) {
     int P,Q;
     double R;
-    for (int k = 0; k < K; ++k) {
-        P = k * lda;
-        for (int j = 0; j < N; ++j) {
-            Q = j * lda;
+    for (int j = 0; j < N; ++j) {
+        Q = j * lda;
+        for (int k = 0; k < K; ++k) {
+            P = k * lda;
             R = B[Q + k];
             for (int i = 0; i < M; ++i)
                 C[i + Q] += A[i + P] * R;
