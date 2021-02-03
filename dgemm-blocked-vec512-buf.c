@@ -20,9 +20,9 @@ static void do_block(int lda, int M, int N, int K, double* A, double* B, double*
     int P, QB, QC, i, j, k;
     __m256d tempB;
     __m512d vectorA, vectorB, vectorC;
-	double* A_buf __attribute__((aligned(32))) = malloc(M * K * sizeof(double));
-    double* B_buf __attribute__((aligned(32))) = malloc(N * K * sizeof(double));
-    double* C_buf __attribute__((aligned(32))) = malloc(M * N * sizeof(double));
+	double* A_buf __attribute__((aligned(64))) = malloc(M * K * sizeof(double));
+    double* B_buf __attribute__((aligned(64))) = malloc(N * K * sizeof(double));
+    double* C_buf __attribute__((aligned(64))) = malloc(M * N * sizeof(double));
     
     // copy over the slice of A
     for (k = 0; k < K; ++k) {
