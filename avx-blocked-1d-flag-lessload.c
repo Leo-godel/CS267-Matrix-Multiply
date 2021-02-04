@@ -47,8 +47,7 @@ static inline __attribute__((optimize("unroll-loops"))) void do_block(int lda, i
 			for (int k = 0; k < K; ++k) {
 				P1 = k * MM;
 				// mm512 does not have load + broadcast function, so this has to be done in two steps
-				tempB = _mm256_broadcast_sd(B + (k + Q2));
-				BB = _mm512_broadcast_f64x4(tempB);
+				BB = _mm512_set1_pd(B[k + Q2]);
 				
 				// unroll the loop
 					// C[i + Q] += A[i + P] * vectorB;
